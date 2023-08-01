@@ -15,5 +15,13 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Set up Azure Machine Learning
+      uses: azure/aml-setup@v1
+      with:
+        workspace-name: ${{secrets.AZUREML_WORKSPACE_NAME}}
+        workspace-resource-group: ${{secrets.AZUREML_WORKSPACE_RESOURCE_GROUP}}
+        workspace-location: ${{secrets.AZUREML_WORKSPACE_LOCATION}}
+    - name: Submit Azure Machine Learning job
+      run: az ml job create -f src/job.yml
 
 
